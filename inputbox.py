@@ -5,15 +5,18 @@ import pygame
 
 pygame.init()
 color_inactive = (214, 214, 214)
-color_active = (200, 200, 200)
+color_active = (150, 150, 150)
+placeholder_color = (220,220,220)
 FONT = pygame.font.Font(None, 32)
 
 class InputBox:
-    def __init__(self,screen,x, y, w, h, text=""):
+    def __init__(self,screen,placeholder, x, y, w, h, text="", ):
         self.rect = pygame.Rect(x, y, w, h)
         self.color = color_inactive
         self.text = text
         self.txt_surface = FONT.render(text, True, self.color)
+        self.placeholder = placeholder
+        self.placeholder_surface = FONT.render(placeholder, True, placeholder_color)
         self.active = False
     
     def handle_event(self, event):
@@ -27,11 +30,10 @@ class InputBox:
             if self.active:
                 if event.key == pygame.K_RETURN:
                     print(self.text)
+                    #we want to do nothing if they press enter
                     self.text=""
-                    #draw_window()
                 elif event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
-                    #draw_window()
                 else:
                     self.text += event.unicode
                 self.txt_surface = FONT.render(self.text, True, self.color)
@@ -42,8 +44,10 @@ class InputBox:
         
     
     def draw(self,screen):
+        if(self.active == False and self.text == ""):
+            screen.blit(self.placeholder_surface, (self.rect.x+5, self.rect.y+5))
         screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
         pygame.draw.rect(screen, self.color, self.rect, 2)
-        
+    
     
     

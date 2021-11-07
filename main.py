@@ -2,6 +2,10 @@
 from typing import Optional
 import pygame
 
+from inputbox import InputBox
+
+
+pygame.init()
 WIDTH, HEIGHT = 900,500
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Banana Clicker")
@@ -12,50 +16,45 @@ FPS = 60
 clock = pygame.time.Clock()
 playgame = False
 login = False
-backgroundColor = (255,255,255)
-login_textbox = (214, 214, 214)
-
-#draws up a window with background color of white
-def draw_window():
-    
-    WIN.fill(backgroundColor)
-    login_window(login)
-    pygame.display.update()
-
-def login_window(logged_in):
-    if(logged_in == False):
-        #in window ask user to either login or register
-        #default is login window with register button
-
-        #dimensions of the text input
-        username_input = pygame.Rect(350,200,140,32)
-        password_input = pygame.Rect(350,240,140,32)
-
-        #drawing the rectangle
-        pygame.draw.rect(WIN,login_textbox,username_input,2)
-        pygame.draw.rect(WIN,login_textbox,password_input,2)
-        pygame.display.flip()
+backgroundColor = (1,1,1)
+base_font = pygame.font.SysFont("GameOfSquids.ttf", 32)
+input_boxes = []
 
 
 
-
-
-
-
-
-
-
+        
 
 
 def main():
-
+    global input_boxes
     run = True
+    username_box = InputBox(WIN,350,200,140,32)
+    password_box = InputBox(WIN,350,240, 140,32)
+    input_boxes = [username_box,password_box]
+    
     while run:
-        clock.tick(FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-        draw_window()
+            for box in input_boxes:
+                box.handle_event(event)
+        WIN.fill(backgroundColor)
+        for box in input_boxes:  
+            box.update()
+            box.draw(WIN)
+        
+        pygame.display.flip()
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
 
     
 

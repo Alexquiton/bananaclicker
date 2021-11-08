@@ -1,10 +1,10 @@
 import json
 
 class Account:
-    def __init__(self, username, password, id):
+    id = -1
+    def __init__(self, username, password):
         self.username = username
         self.password = password
-        self.id = id
     
     def loadlist(self):
         data = open("user_details.txt")
@@ -17,5 +17,24 @@ class Account:
 
     
 
-    def save(self):
-        self.loadlist()
+    def register(self):
+        account_list = self.loadlist()
+        for account in account_list:
+            if(account["username"] == self.username):
+                print("there is already an account under that username")
+                return
+        
+    
+
+    def login(self):
+        login_access = False
+        account_list = self.loadlist()
+        for account in account_list:
+            if(account["username"] == self.username and account["password"] == self.password):
+                login_access = True
+                break
+        if(login_access == True):
+            print("login sucessful")
+            
+        else:
+            print("wrong username or password")

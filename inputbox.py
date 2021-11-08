@@ -10,13 +10,18 @@ placeholder_color = (220,220,220)
 FONT = pygame.font.Font(None, 32)
 
 class InputBox:
-    def __init__(self,screen,placeholder, x, y, w, h, text="", ):
+    pygame.init()
+    color_inactive = (214, 214, 214)
+    color_active = (150, 150, 150)
+    placeholder_color = (220,220,220)
+    FONT = pygame.font.Font(None, 32)   
+    def __init__(self,placeholder, x, y, w, h, text="", ):
         self.rect = pygame.Rect(x, y, w, h)
         self.color = color_inactive
         self.text = text
         self.txt_surface = FONT.render(text, True, self.color)
         self.placeholder = placeholder
-        self.placeholder_surface = FONT.render(placeholder, True, placeholder_color)
+        self.placeholder_surface = FONT.render(self.placeholder, True, placeholder_color)
         self.active = False
     
     def handle_event(self, event):

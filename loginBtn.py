@@ -1,4 +1,7 @@
 import pygame
+import json
+
+
 
 pygame.init()
 color_active = (150, 150, 150)
@@ -28,11 +31,47 @@ class LoginBtn:
         screen.blit(self.placeholder_surface, (self.rect.x+5, self.rect.y+5))
         pygame.draw.rect(screen,self.color, self.rect, 2)
     
+    def load(self):
+        data = open("user_details.txt","r")
+        account_list = []
+        for account in data:
+            if(account != ""):
+                dict_account = json.loads(account)
+                account_list.append(dict_account)
+        return account_list
+
     def login(self,username,password):
-        #login
-        print(username)
-        print(password)
+        
+        login_access = False
+        no_username = True
+        wrong_password = False
+        false_login = []
+        correct_login = []
+        account_list = self.load()
+        for account in account_list:
+            if(account["username"] == username and account["password"] == password):
+                login_access = True
+                no_username = False
+                break
+            if(account["username"] == username and account["password"] != password):
+                no_username = False
+                wrong_password = True
+                break
+        
         self.active = False
+        if(login_access == True):
+            #found account and password correctly
+            correct_login.append(True)
+            return correct_login
+        else:
+            if(no_username):
+                false_login.append(False)
+                false_login.append("No account under username")
+            if(wrong_password):
+                false_login.append(False)
+                false_login.append("Wrong password")
+            return false_login
+        
 
 
     

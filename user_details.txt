@@ -1,1 +1,4 @@
-dev,password
+{"username": "dev", "password": "dawg", "id": 0}
+{"username": "john", "password": "deer", "id": 1}
+{"username": "gggggggg", "password": "d", "id": 2}
+{"username": "hhhh", "password": "d", "id": 3}

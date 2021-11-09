@@ -1,3 +1,1 @@
-{"username": "dev", "password": "dawg", "bananas": 500}
-{"username": "dd", "password": "dd", "bananas": 1}
-{"username": "john", "password": "deer", "bananas": 0}
+{"username": "dev", "password": "dawg", "bananas": 45}

@@ -11,13 +11,50 @@ class Game_Screen:
         self.run = True
         self.backgroundColor = backgroundColor
         self.bananas = 0
+        self.username = ""
         #temp
         
     
     
     
-    def load_progress(self,bananas):
+    def load_progress(self,bananas,username):
         self.bananas = bananas
+        self.username = username
+    
+    def load_accounts(self):
+        data = open("user_details.txt","r")
+        account_list = []
+        for account in data:
+            if(account != ""):
+                dict_account = json.loads(account)
+                account_list.append(dict_account)
+        data.close()
+        return account_list
+    def save_progress(self):
+        data = open("user_details.txt","r")
+        account_list = self.load_accounts()
+        list_of_lines = data.readlines()
+        lineNum = 0
+        saved_account = {}
+        for account in account_list:
+            if(account["username"] == self.username):
+                saved_account = account
+                account["bananas"] = self.bananas
+                print(self.bananas) #-------------------------------
+                print(saved_account)
+                break
+            lineNum += 1
+        list_of_lines[lineNum] = json.dumps(saved_account)
+        data = open("user_details.txt", "w")
+        data.writelines(list_of_lines)
+        data.close()
+        
+
+        data.close()
+        print('saved progress')
+
+
+
         
 
     def draw_screen(self):
@@ -27,12 +64,11 @@ class Game_Screen:
         #temp
         counter_color = (0,0,0)
         while self.run:
-            
-            print(bananaBtn.active)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    self.save_progress()
                     self.run = False
-                #------all buttons will be in here------#
+                #------all button events will be in here------#
                 for buttons in button_list:
                     buttons.on_click(event)
             
@@ -40,6 +76,7 @@ class Game_Screen:
                 if(button.button_name == "banana"):
                     if(button.active == True):
                         game.addBanana(1)
+                        self.bananas = game.bananas
                         button.active = False
 
             

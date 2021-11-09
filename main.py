@@ -30,7 +30,7 @@ def main():
     if(gamerun):
         gamescreen = Game_Screen(WIN,gameBGcolor)
         #load game prgoress
-        gamescreen.load_progress(user_account["bananas"])
+        gamescreen.load_progress(user_account["bananas"],user_account["username"])
         gamescreen.draw_screen()
 
     #play game 

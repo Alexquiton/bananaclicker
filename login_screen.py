@@ -18,18 +18,17 @@ class login_screen:
         self.login_color = (0,0,0)
         self.login_surface = FONT.render(self.login_title, True, self.login_color )
         self.error_message = ""
-        self.error_color = (0,0,0)
+        self.error_color = (255,50,0)
         self.error_active = False
         
     def draw_screen(self):
-        username_box = InputBox("Username",350,200,140,32)
-        password_box = InputBox("Password",350,240,140,32)
+        username_box = InputBox("Username",595,325,140,32)
+        password_box = InputBox("Password",595,375,140,32)
         input_boxes = [username_box,password_box]
-        login_button = LoginBtn(350,290,70,32,"Login")
-        #create a register class
-        register_button = RegisterBtn(450,290,100,32,"Register")
-        back_button = RegisterBtn(350,290,70,32, "Back")
-        signup_button = RegisterBtn(450,290,90,32,"Sign Up")
+        login_button = LoginBtn(595,425,70,32,"Login")
+        register_button = RegisterBtn(695,425,100,32,"Register")
+        back_button = RegisterBtn(595,425,70,32, "Back")
+        signup_button = RegisterBtn(700,425,95,32,"Sign Up")
         buttons = [login_button, signup_button]
         
         while self.run:
@@ -96,18 +95,19 @@ class login_screen:
             #controls screens
             if(self.login):
                 #displays login title
-                self.WIN.blit(self.login_surface, (410, 160))
+                self.WIN.blit(self.login_surface, (655, 275))
                 register_button.active = False
                 back_button.active = False
             else:
-                self.WIN.blit(self.register_surface, (390, 160))
+                #display register title and register/back buttons
+                self.WIN.blit(self.register_surface, (635, 275))
                 register_button.draw_button(self.WIN)
                 back_button.draw_button(self.WIN)
             
-            #errors
+            #displays errors
             if(self.error_active):
                 error_surface = FONT.render(self.error_message, True, self.error_color)
-                self.WIN.blit(error_surface,(200,100))
+                self.WIN.blit(error_surface,(555,495))
                 
             pygame.display.flip()
 

@@ -2,7 +2,7 @@ import pygame
 from pygame.constants import MOUSEBUTTONDOWN
 import time
 
-image = pygame.image.load("banana_image.jpg")
+image = pygame.image.load("the_banana_image.png")
 banana_image = pygame.transform.scale(image, (500,500))
 position = (50,50)
 

@@ -34,7 +34,6 @@ class RegisterBtn:
                 account_list.append(dict_account)
         return account_list
 
-
     def register(self,username,password):
         account_list = self.load()
         last_account = account_list[-1]
@@ -46,7 +45,6 @@ class RegisterBtn:
             if(account["username"] == username):
                 taken_username = True
                 break
-
         if(taken_username == True):
             false_register.append(False)
             false_register.append("Username Already Taken")
@@ -61,5 +59,14 @@ class RegisterBtn:
             data.write("\n")
             json.dump(account,data)
             data.close
+            #--------
+            game_progress = {
+                "id": id,
+                "bananas": 0
+            }
+            gameprog = open("gameprogress.txt","a")
+            gameprog.write("\n")
+            json.dump(game_progress,gameprog)
+            gameprog.close
             correct_register.append(True)
             return correct_register

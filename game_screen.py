@@ -10,23 +10,15 @@ class Game_Screen:
         self.WIN = WIN
         self.run = True
         self.backgroundColor = backgroundColor
+        self.bananas = 0
         #temp
         
     
     
     
-    def load_progress(self,id):
-        game_data = open("gameprogress.txt","r")
-        gameprog_list = []
-        for progress in game_data:
-            if(progress != ""):
-                dict_progress = json.loads(progress)
-                gameprog_list.append(dict_progress)
+    def load_progress(self,bananas):
+        self.bananas = bananas
         
-        for progress in gameprog_list:
-            if(progress["id"] == id):
-                self.bananas = progress["bananas"]
-                break
 
     def draw_screen(self):
         game = Game(self.bananas)

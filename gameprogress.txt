@@ -1,2 +1,0 @@
-{"id": 0, "bananas": 0}
-{"id": 1, "bananas": 0}

@@ -36,8 +36,6 @@ class RegisterBtn:
 
     def register(self,username,password):
         account_list = self.load()
-        last_account = account_list[-1]
-        id = last_account["id"] + 1
         false_register = []
         correct_register = []
         taken_username = False
@@ -53,20 +51,11 @@ class RegisterBtn:
             account = {
                 "username": username,
                 "password": password,
-                "id": id
+                "bananas": 0
             }
             data = open("user_details.txt","a")
             data.write("\n")
             json.dump(account,data)
             data.close
-            #--------
-            game_progress = {
-                "id": id,
-                "bananas": 0
-            }
-            gameprog = open("gameprogress.txt","a")
-            gameprog.write("\n")
-            json.dump(game_progress,gameprog)
-            gameprog.close
             correct_register.append(True)
             return correct_register

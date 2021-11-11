@@ -18,6 +18,9 @@ backgroundColor = (255,255,255)
 gameBGcolor = (255, 196, 0)
 gamerun = False
 
+#test if the save feature works if the pygame game quits without hitting the exit button
+current_account = {}
+
 def main():
     run = True
     user_account = {}

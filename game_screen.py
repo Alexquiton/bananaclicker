@@ -2,6 +2,7 @@ import pygame
 import json
 from banana_button import BananaBtn
 from game import Game
+from scoreboard import Scoreboard
 
 
 class Game_Screen:
@@ -14,9 +15,6 @@ class Game_Screen:
         self.username = ""
         #temp
         
-    
-    
-    
     def load_progress(self,bananas,username):
         self.bananas = bananas
         self.username = username
@@ -30,6 +28,7 @@ class Game_Screen:
                 account_list.append(dict_account)
         data.close()
         return account_list
+
     def save_progress(self):
         data = open("user_details.txt","r")
         account_list = self.load_accounts()
@@ -44,23 +43,18 @@ class Game_Screen:
                 print(saved_account)
                 break
             lineNum += 1
-        list_of_lines[lineNum] = json.dumps(saved_account)
+        list_of_lines[lineNum] = json.dumps(saved_account) + "\n"
         data = open("user_details.txt", "w")
         data.writelines(list_of_lines)
         data.close()
-        
-
         data.close()
         print('saved progress')
-
-
-
-        
 
     def draw_screen(self):
         game = Game(self.bananas)
         bananaBtn = BananaBtn()
         button_list = [bananaBtn]
+        board = Scoreboard(10,10,135,120, "Scoreboard")
         #temp
         counter_color = (0,0,0)
         while self.run:
@@ -79,12 +73,12 @@ class Game_Screen:
                         self.bananas = game.bananas
                         button.active = False
 
-            
             self.WIN.fill(self.backgroundColor)
             #anything draw to the screen
             bananaBtn.draw_button(self.WIN)
             counter_title = "Counter: " + str(game.bananas)
             counter_surface = self.FONT.render(counter_title, True, counter_color)
             self.WIN.blit(counter_surface, (600,100))
+            board.draw(self.WIN)
 
             pygame.display.flip()

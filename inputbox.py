@@ -1,8 +1,6 @@
 from typing import Text
 import pygame
 
-
-
 pygame.init()
 color_inactive = (214, 214, 214)
 color_active = (150, 150, 150)
@@ -47,7 +45,6 @@ class InputBox:
         width = max(200, self.txt_surface.get_width()+10)
         self.rect.w= width
         
-    
     def draw(self,screen):
         if(self.active == False and self.text == ""):
             screen.blit(self.placeholder_surface, (self.rect.x+5, self.rect.y+5))

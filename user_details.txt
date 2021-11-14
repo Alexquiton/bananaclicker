@@ -1,1 +1,3 @@
-{"username": "dev", "password": "dawg", "bananas": 45}
+{"username": "dev", "password": "dawg", "bananas": 650}
+{"username": "account2", "password": "pass2", "bananas": 64}
+{"username": "account3", "password": "pass3", "bananas": 942}

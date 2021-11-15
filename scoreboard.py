@@ -50,7 +50,7 @@ class Scoreboard:
             if(player_increment == 5):
                 break
             y_increment += 17
-            playersurface = player_text.createText(self.text_color,account["username"] + "- " + str(account["bananas"]))
+            playersurface = player_text.createText(self.text_color,account["username"] + "- " + str(account["bananas"]),24)
             player_blit = [playersurface,(self.rect.x+5,self.rect.y+y_increment)]
             player_blit_list.append(player_blit)
             player_increment += 1

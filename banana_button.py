@@ -12,13 +12,14 @@ class BananaBtn:
         self.image_rect = self.image.get_rect(topleft=position)
         self.active = False
         self.button_name = "banana"
+        
     
     def on_click(self,event):
         if event.type == MOUSEBUTTONDOWN:
             if self.image_rect.collidepoint(event.pos):
                 self.active = True
                 click_sound = pygame.mixer.Sound("mouseBtn_down.mp3")
-                click_sound.set_volume(0.07)
+                click_sound.set_volume(0.04)
                 click_sound.play()
                 
         else:
@@ -26,9 +27,11 @@ class BananaBtn:
         if event.type == MOUSEBUTTONUP:
             if self.image_rect.collidepoint(event.pos):
                 release_sound = pygame.mixer.Sound("mouseBtn_up.mp3")
-                release_sound.set_volume(0.06)
+                release_sound.set_volume(0.03)
                 release_sound.play()
+        
 
     
     def draw_button(self,screen):
+        banana_image.convert_alpha(screen)
         screen.blit(self.image,self.image_rect)

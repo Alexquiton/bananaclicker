@@ -1,19 +1,26 @@
 import pygame
 import json
+
+from pygame.time import Clock
 from banana_button import BananaBtn
 from game import Game
 from scoreboard import Scoreboard
 background_image = pygame.image.load("gameScreen_bg.png")
 background_image = pygame.transform.scale(background_image, (1400,800))
 
+
+
 class Game_Screen:
-    def __init__(self,WIN,backgroundColor):
+    def __init__(self,WIN,backgroundColor,FPS):
         self.FONT = pygame.font.Font(None, 32)
         self.WIN = WIN
         self.run = True
         self.backgroundColor = backgroundColor
         self.bananas = 0
         self.username = ""
+        self.FPS = FPS
+        background_image.convert(WIN)
+        self.clock = pygame.time.Clock()
         
     def load_progress(self,bananas,username):
         self.bananas = bananas
@@ -59,6 +66,7 @@ class Game_Screen:
         #temp
         counter_color = (0,0,0)
         while self.run:
+            self.clock.tick(self.FPS)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.save_progress()

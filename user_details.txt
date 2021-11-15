@@ -1,4 +1,4 @@
-{"username": "dev", "password": "dawg", "bananas": 1292}
+{"username": "dev", "password": "dawg", "bananas": 1859}
 {"username": "p2", "password": "pass2", "bananas": 68}
 {"username": "p3", "password": "pass3", "bananas": 164}
 {"username": "p4", "password": "pass4", "bananas": 15}

@@ -1,10 +1,11 @@
 import pygame
 import json
+from text import Text
 
 pygame.init()
 color_active = (150, 150, 150)
 placeholder_color = (150,150,150)
-FONT = pygame.font.Font(None, 32)
+
 
 class LoginBtn:
     
@@ -13,7 +14,8 @@ class LoginBtn:
         self.color = color_active
         self.active = False
         self.placeholder = placeholder
-        self.placeholder_surface = FONT.render(self.placeholder, True, placeholder_color)
+        self.placeholder_surface = Text()
+        self.placeholder_surface = self.placeholder_surface.createText(self.color,self.placeholder,32)
     
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:

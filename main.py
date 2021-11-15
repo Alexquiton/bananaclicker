@@ -36,10 +36,6 @@ def main():
         gamescreen.load_progress(user_account["bananas"],user_account["username"])
         gamescreen.draw_screen()
 
-    #play game 
-
-    #save and load
-
     print("LOGGED In")
 
     pygame.quit()

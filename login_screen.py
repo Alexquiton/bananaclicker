@@ -3,8 +3,10 @@ import pygame
 from inputbox import InputBox
 from loginBtn import FONT, LoginBtn
 from registerBtn import RegisterBtn
+background_image = pygame.image.load("loginScreen_bg.png")
+background_image = pygame.transform.scale(background_image, (1400,800))
+
 class login_screen:
-    
     def __init__(self,WIN,backgroundColor):
         FONT = pygame.font.Font(None, 32)
         self.WIN = WIN
@@ -46,7 +48,9 @@ class login_screen:
                     back_button.handle_event(event)
             
             #drawing buttons/input boxes
-            self.WIN.fill(self.backgroundColor)
+            
+            #self.WIN.fill(self.backgroundColor)
+            self.WIN.blit(background_image,background_image.get_rect(topleft=(0,0)))
             for box in input_boxes:  
                 box.update()
                 box.draw(self.WIN)

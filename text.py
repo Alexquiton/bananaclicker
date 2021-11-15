@@ -1,6 +1,6 @@
 import pygame
 pygame.init()
-FONT = pygame.font.Font(None,32)
+FONT = pygame.font.Font(None,24)
 
 class Text:
     def __init__(self):

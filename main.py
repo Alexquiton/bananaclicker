@@ -13,7 +13,7 @@ WIN.set_alpha(None)
 pygame.display.set_caption("Banana Clicker")
 
 #variables
-FPS = 30
+FPS = 15
 
 backgroundColor = (255,255,255)
 gameBGcolor = (255, 196, 0)

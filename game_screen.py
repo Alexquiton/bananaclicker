@@ -1,5 +1,6 @@
 import pygame
 import json
+from pygame.constants import BLEND_ALPHA_SDL2
 
 from pygame.time import Clock
 from banana_button import BananaBtn
@@ -83,6 +84,7 @@ class Game_Screen:
             self.save_progress()
             #self.WIN.fill(self.backgroundColor)
             self.WIN.blit(background_image,background_image.get_rect(topleft=(0,0)))
+            
             #anything draw to the screen
             bananaBtn.draw_button(self.WIN)
             counter_title = "Counter: " + str(game.bananas)

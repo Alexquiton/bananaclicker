@@ -4,7 +4,7 @@ from inputbox import InputBox
 from loginBtn import LoginBtn
 from registerBtn import RegisterBtn
 from text import Text
-background_image = pygame.image.load("loginScreen_bg.png")
+background_image = pygame.image.load("Assets/loginScreen_bg.png")
 background_image = pygame.transform.scale(background_image, (1400,800))
 
 class login_screen:
@@ -21,7 +21,7 @@ class login_screen:
         self.error_active = False
         self.FPS = FPS
         self.clock = pygame.time.Clock()
-        background_image.convert(WIN)
+        background_image.convert(self.WIN)
         
     def draw_screen(self):
         username_box = InputBox("Username",595,325,140,32)
@@ -62,6 +62,18 @@ class login_screen:
                 if(self.login):
                     button.draw_button(self.WIN)
             
+            #controls screens
+            if(self.login):
+                #displays login title
+                self.WIN.blit(self.login_surface, (655, 275))
+                register_button.active = False
+                back_button.active = False
+            else:
+                #display register title and register/back buttons
+                self.WIN.blit(self.register_surface, (635, 275))
+                register_button.draw_button(self.WIN)
+                back_button.draw_button(self.WIN)
+
             #screen switching buttons
             if(signup_button.active == True):
                 self.login = False
@@ -100,17 +112,7 @@ class login_screen:
                     signup_button.active = False
                     self.error_active = False
 
-            #controls screens
-            if(self.login):
-                #displays login title
-                self.WIN.blit(self.login_surface, (655, 275))
-                register_button.active = False
-                back_button.active = False
-            else:
-                #display register title and register/back buttons
-                self.WIN.blit(self.register_surface, (635, 275))
-                register_button.draw_button(self.WIN)
-                back_button.draw_button(self.WIN)
+            
             
             #displays errors
             if(self.error_active):

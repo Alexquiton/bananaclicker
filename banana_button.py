@@ -2,7 +2,7 @@ import pygame
 from pygame.constants import MOUSEBUTTONDOWN, MOUSEBUTTONUP
 import time
 
-image = pygame.image.load("banana_image.png")
+image = pygame.image.load("Assets/banana_image.png")
 banana_image = pygame.transform.scale(image, (250,250))
 position = (20,70)
 
@@ -18,16 +18,16 @@ class BananaBtn:
         if event.type == MOUSEBUTTONDOWN:
             if self.image_rect.collidepoint(event.pos):
                 self.active = True
-                click_sound = pygame.mixer.Sound("mouseBtn_down.mp3")
-                click_sound.set_volume(0.04)
+                click_sound = pygame.mixer.Sound("Assets/mouseBtn_down.mp3")
+                click_sound.set_volume(0.008)
                 click_sound.play()
                 
         else:
             self.active = False
         if event.type == MOUSEBUTTONUP:
             if self.image_rect.collidepoint(event.pos):
-                release_sound = pygame.mixer.Sound("mouseBtn_up.mp3")
-                release_sound.set_volume(0.03)
+                release_sound = pygame.mixer.Sound("Assets/mouseBtn_up.mp3")
+                release_sound.set_volume(0.009)
                 release_sound.play()
         
 

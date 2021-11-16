@@ -2,7 +2,6 @@
 from typing import Optional
 import pygame
 from game_screen import Game_Screen
-
 from login_screen import login_screen
 
 pygame.init()
@@ -14,13 +13,9 @@ pygame.display.set_caption("Banana Clicker")
 
 #variables
 FPS = 15
-
 backgroundColor = (255,255,255)
 gameBGcolor = (255, 196, 0)
 gamerun = False
-
-#test if the save feature works if the pygame game quits without hitting the exit button
-current_account = {}
 
 def main():
     run = True
@@ -36,9 +31,6 @@ def main():
         #load game prgoress
         gamescreen.load_progress(user_account["bananas"],user_account["username"])
         gamescreen.draw_screen()
-
-    print("LOGGED In")
-    
     pygame.quit()
 
 if __name__ == "__main__":

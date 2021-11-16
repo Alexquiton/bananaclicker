@@ -6,7 +6,7 @@ from pygame.time import Clock
 from banana_button import BananaBtn
 from game import Game
 from scoreboard import Scoreboard
-background_image = pygame.image.load("gameScreen_bg.png")
+background_image = pygame.image.load("Assets/gameScreen_bg.png")
 background_image = pygame.transform.scale(background_image, (1400,800))
 
 

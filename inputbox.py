@@ -21,6 +21,7 @@ class InputBox:
         self.placeholder = placeholder
         self.placeholder_surface = FONT.render(self.placeholder, True, placeholder_color)
         self.active = False
+        self.censored_text = ""
     
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -33,13 +34,24 @@ class InputBox:
             if self.active:
                 if event.key == pygame.K_RETURN:
                     print(self.text)
-                    #we want to do nothing if they press enter
+                    #if box is password then return should trigger login button
                     self.text=""
+                    self.censored_text=""
                 elif event.key == pygame.K_BACKSPACE:
+                    if(self.placeholder == "Password"):
+                        self.censored_text = self.censored_text[:-1]
                     self.text = self.text[:-1]
+
                 else:
                     self.text += event.unicode
-                self.txt_surface = FONT.render(self.text, True, self.color)
+                    if(self.placeholder == "Password"):
+                        while len(self.censored_text) < len(self.text):
+                            self.censored_text += "*"
+
+                if(self.placeholder == "Password"):
+                    self.txt_surface = FONT.render(self.censored_text, True, self.color)
+                else:
+                    self.txt_surface = FONT.render(self.text, True, self.color)
     
     def update(self):
         width = max(200, self.txt_surface.get_width()+10)

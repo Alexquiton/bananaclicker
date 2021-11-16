@@ -1,6 +1,6 @@
-{"username": "dev", "password": "dawg", "bananas": 3195}
+{"username": "dev", "password": "dawg", "bananas": 3402}
 {"username": "p2", "password": "pass2", "bananas": 71}
 {"username": "p3", "password": "pass3", "bananas": 164}
 {"username": "p4", "password": "pass4", "bananas": 15}
-{"username": "p5", "password": "pass5", "bananas": 27}
+{"username": "p5", "password": "pass5", "bananas": 47}
 {"username": "p6", "password": "pass6", "bananas": 46}

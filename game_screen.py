@@ -63,7 +63,7 @@ class Game_Screen:
         game = Game(self.bananas)
         bananaBtn = BananaBtn()
         button_list = [bananaBtn]
-        board = Scoreboard(1255,10,135,120, "Scoreboard")
+        board = Scoreboard(1255,10,135,120, "Leader Board")
         #temp
         counter_color = (0,0,0)
         while self.run:
@@ -87,7 +87,7 @@ class Game_Screen:
             
             #anything draw to the screen
             bananaBtn.draw_button(self.WIN)
-            counter_title = "Counter: " + str(game.bananas)
+            counter_title = "Bananas: " + str(game.bananas)
             counter_surface = self.FONT.render(counter_title, True, counter_color)
             self.WIN.blit(counter_surface, (50,30))
             board.draw(self.WIN)

@@ -15,10 +15,10 @@ pygame.display.set_caption("Banana Clicker")
 FPS = 15
 backgroundColor = (255,255,255)
 gameBGcolor = (255, 196, 0)
-gamerun = False
+
 
 def main():
-    run = True
+    gamerun = False
     user_account = {}
     #login screen can also register
     loginscreen = login_screen(WIN,backgroundColor,FPS)

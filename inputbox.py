@@ -7,13 +7,47 @@ color_active = (150, 150, 150)
 placeholder_color = (220,220,220)
 FONT = pygame.font.Font(None, 32)
 
+###############################################################
+# Input Box Class
+# Functions:
+# __init__(placeholder,x,y,w,h,text="")
+# @params: placeholder,x,y,w,h,text=""
+# placeholdeer is the title of the box and appears in the inputbox
+# x and y are the position of the input boxes on the screen
+# w and h are the width and height of the input box
+# text="" is the text that the user is typing in the inputboxes
+# @bref: initalizes self variables
+# @returns: none
+#
+# handle_event(event):
+# @params event
+# event is the user input such as mousebutton down are keystrokes
+# @brief: takes in event and assigns the variables accordlingly to
+# what event is inputted, also with each keystroke it will add it to the
+# the text="" varible and will also delete a letter of what was inputted
+# also differiates between a username box and password box in which the password box
+# will censor the text on screen but will still store what the user is typing
+# @returns: none
+#
+# update():
+# @params: none
+# @brief: updates the width of the box depending on the number of characters in the text
+# @returns: none
+#
+# draw(WIN):
+# @params: WIN
+# WIN refers to the window that is displaying to the user
+# @breif: draws the input box along with the text that the user inputted and the placeholders
+# @returns: none
+#################################################################
+
 class InputBox:
     pygame.init()
     color_inactive = (214, 214, 214)
     color_active = (150, 150, 150)
     placeholder_color = (220,220,220)
     FONT = pygame.font.Font(None, 32)   
-    def __init__(self,placeholder, x, y, w, h, text="", ):
+    def __init__(self,placeholder, x, y, w, h, text=""):
         self.rect = pygame.Rect(x, y, w, h)
         self.color = color_inactive
         self.text = text

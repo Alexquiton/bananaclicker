@@ -1,7 +1,8 @@
-{"username": "dev", "password": "dawg", "bananas": 3674}
+{"username": "dev", "password": "dawg", "bananas": 3841}
 {"username": "p2", "password": "pass2", "bananas": 71}
 {"username": "p3", "password": "pass3", "bananas": 164}
 {"username": "p4", "password": "pass4", "bananas": 15}
 {"username": "p5", "password": "pass5", "bananas": 47}
 {"username": "p6", "password": "pass6", "bananas": 75}
-{"username": "", "password": "asdf", "bananas": 0}
+{"username": "dawg", "password": "d", "bananas": 3}
+{"username": "red", "password": "dddd", "bananas": 17}

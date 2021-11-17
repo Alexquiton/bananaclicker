@@ -1,17 +1,40 @@
 import json
 import pygame
 from inputbox import InputBox
-from loginBtn import LoginBtn
-from registerBtn import RegisterBtn
+from loginScreenBtn import LoginScreenBtn
 from text import Text
 background_image = pygame.image.load("Assets/loginScreen_bg.png")
 background_image = pygame.transform.scale(background_image, (1400,800))
 
+##################################
+# Login Screen  Class
+# Functions:
+# __init__(WIN, FPS):
+# @params: WIN, FPS
+# WIN is the main screen window that is initalized in main.py
+# FPS is how many frames per second the login screen will refresh
+# @brief: function initalizes the login screen self variables
+# @returns: none
+#
+# runLogin():
+# @params: none
+# @brief: handles the user inputs along with drawing buttons,text,inputboxes,background image to the window
+# @returns: the account that is logged in to the mainscreen
+#
+# draw_screen(input_boxes, loginScreen_buttons, registerScreen_buttons):
+# @params: input_boxes, loginScreen_buttons, registerScreen_buttons
+# input_boxes are the username and inputbox fields
+# loginScreen_buttons are the buttons that are shown on the login screen
+# registerScreen_buttons are the buttons that are shown when registering
+# @bref: draws the buttons,input boxes, and title of current screen onto the window
+# @returns: none
+#####################################
+
+
 class login_screen:
-    def __init__(self,WIN,backgroundColor,FPS):
+    def __init__(self,WIN,FPS):
         FONT = pygame.font.Font(None, 32)
         self.WIN = WIN
-        self.backgroundColor = backgroundColor
         self.run = True
         self.login = True
         self.register_surface = Text()
@@ -29,12 +52,13 @@ class login_screen:
         username_box = InputBox("Username",595,325,140,32)
         password_box = InputBox("Password",595,375,140,32)
         input_boxes = [username_box,password_box]
-        login_button = LoginBtn(595,425,70,32,"Login")
-        register_button = RegisterBtn(695,425,100,32,"Register")
-        back_button = RegisterBtn(595,425,70,32, "Back")
-        signup_button = RegisterBtn(700,425,95,32,"Sign Up")
-        buttons = [login_button, signup_button]
-        #main buttons
+        login_button = LoginScreenBtn(595,425,70,32,"Login")
+        register_button = LoginScreenBtn(695,425,100,32,"Register")
+        back_button = LoginScreenBtn(595,425,70,32, "Back")
+        signup_button = LoginScreenBtn(700,425,95,32,"Sign Up")
+        loginScreen_buttons = [login_button, signup_button]
+        registerScreen_buttons = [register_button,back_button]
+        
             
         while self.run:
             self.clock.tick(self.FPS)
@@ -45,12 +69,12 @@ class login_screen:
                     self.run = False
                 for box in input_boxes:
                     box.handle_event(event)
-                for button in buttons:
+                for button in loginScreen_buttons:
                     if(self.login):
                         button.handle_event(event)
                 if(self.login == False):
-                    register_button.handle_event(event)
-                    back_button.handle_event(event)
+                    for button in registerScreen_buttons:
+                        button.handle_event(event)
             
             #main buttons
             if(login_button.active == True):
@@ -79,16 +103,15 @@ class login_screen:
                     self.login = True
                     signup_button.active = False
                     self.error_active = False
-
-            self.draw_screen(input_boxes,buttons,register_button,back_button,signup_button)
+            self.draw_screen(input_boxes,loginScreen_buttons,registerScreen_buttons)
             
 
-    def draw_screen(self,input_boxes,buttons,register_button,back_button,signup_button):
+    def draw_screen(self,input_boxes,loginScreen_buttons,registerScreen_buttons):
         self.WIN.blit(background_image,background_image.get_rect(topleft=(0,0)))
         for box in input_boxes:  
             box.update()
             box.draw(self.WIN)
-        for button in buttons:
+        for button in loginScreen_buttons:
             if(self.login):
                 button.draw_button(self.WIN)
             
@@ -96,22 +119,23 @@ class login_screen:
         if(self.login):
             #displays login title
             self.WIN.blit(self.login_surface, (655, 275))
-            register_button.active = False
-            back_button.active = False
+            for button in registerScreen_buttons:
+                button.active = False
         else:
             #display register title and register/back buttons
             self.WIN.blit(self.register_surface, (635, 275))
-            register_button.draw_button(self.WIN)
-            back_button.draw_button(self.WIN)
+            for button in registerScreen_buttons:
+                button.draw_button(self.WIN)
+            
 
         #screen switching buttons
-        if(signup_button.active == True):
+        if(loginScreen_buttons[1].active == True):
             self.login = False
             self.error_active = False
         
-        if(back_button.active == True):
+        if(registerScreen_buttons[1].active == True):
             self.login = True
-            signup_button.active = False
+            loginScreen_buttons[1].active = False
             self.error_active = False
         
         #displays errors

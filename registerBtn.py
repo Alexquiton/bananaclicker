@@ -44,6 +44,10 @@ class RegisterBtn:
             if(account["username"] == username):
                 taken_username = True
                 break
+        if(len(username) == 0 or len(password) == 0):
+            false_register.append(False)
+            false_register.append("Invalid username or password")
+            return false_register
         if(taken_username == True):
             false_register.append(False)
             false_register.append("Username Already Taken")

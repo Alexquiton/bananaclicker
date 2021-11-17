@@ -43,10 +43,13 @@ class InputBox:
                     self.text = self.text[:-1]
 
                 else:
-                    self.text += event.unicode
-                    if(self.placeholder == "Password"):
-                        while len(self.censored_text) < len(self.text):
-                            self.censored_text += "*"
+                    if(event.key != pygame.K_SPACE):
+                        if(event.key != pygame.K_TAB):
+                            self.text += event.unicode
+                            if(self.placeholder == "Password"):
+                                while len(self.censored_text) < len(self.text):
+                                    self.censored_text += "*"
+                    
 
                 if(self.placeholder == "Password"):
                     self.txt_surface = FONT.render(self.censored_text, True, self.color)

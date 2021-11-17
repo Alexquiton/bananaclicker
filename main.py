@@ -22,7 +22,7 @@ def main():
     user_account = {}
     #login screen can also register
     loginscreen = login_screen(WIN,backgroundColor,FPS)
-    user_account = loginscreen.draw_screen()
+    user_account = loginscreen.runLogin()
     #should return id number here
     if(user_account != None):
         gamerun = True
@@ -30,7 +30,7 @@ def main():
         gamescreen = Game_Screen(WIN,gameBGcolor,FPS)
         #load game prgoress
         gamescreen.load_progress(user_account["bananas"],user_account["username"])
-        gamescreen.draw_screen()
+        gamescreen.runGame()
     pygame.quit()
 
 if __name__ == "__main__":

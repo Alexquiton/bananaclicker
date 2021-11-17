@@ -16,14 +16,16 @@ class login_screen:
         self.login = True
         self.register_surface = Text()
         self.login_surface = Text()
+        self.register_surface = self.register_surface.createText((0,0,0),"REGISTER",32)
+        self.login_surface = self.login_surface.createText((0,0,0),"LOGIN",32)
         self.error_message = ""
         self.error_color = (255,50,0)
         self.error_active = False
         self.FPS = FPS
         self.clock = pygame.time.Clock()
         background_image.convert(self.WIN)
-        
-    def draw_screen(self):
+    
+    def runLogin(self):
         username_box = InputBox("Username",595,325,140,32)
         password_box = InputBox("Password",595,375,140,32)
         input_boxes = [username_box,password_box]
@@ -32,9 +34,8 @@ class login_screen:
         back_button = RegisterBtn(595,425,70,32, "Back")
         signup_button = RegisterBtn(700,425,95,32,"Sign Up")
         buttons = [login_button, signup_button]
-        self.register_surface = self.register_surface.createText((0,0,0),"REGISTER",32)
-        self.login_surface = self.login_surface.createText((0,0,0),"LOGIN",32)
-        
+        #main buttons
+            
         while self.run:
             self.clock.tick(self.FPS)
             #event handlers
@@ -50,39 +51,6 @@ class login_screen:
                 if(self.login == False):
                     register_button.handle_event(event)
                     back_button.handle_event(event)
-            
-            #drawing buttons/input boxes
-            
-            #self.WIN.fill(self.backgroundColor)
-            self.WIN.blit(background_image,background_image.get_rect(topleft=(0,0)))
-            for box in input_boxes:  
-                box.update()
-                box.draw(self.WIN)
-            for button in buttons:
-                if(self.login):
-                    button.draw_button(self.WIN)
-            
-            #controls screens
-            if(self.login):
-                #displays login title
-                self.WIN.blit(self.login_surface, (655, 275))
-                register_button.active = False
-                back_button.active = False
-            else:
-                #display register title and register/back buttons
-                self.WIN.blit(self.register_surface, (635, 275))
-                register_button.draw_button(self.WIN)
-                back_button.draw_button(self.WIN)
-
-            #screen switching buttons
-            if(signup_button.active == True):
-                self.login = False
-                self.error_active = False
-            
-            if(back_button.active == True):
-                self.login = True
-                signup_button.active = False
-                self.error_active = False
             
             #main buttons
             if(login_button.active == True):
@@ -112,15 +80,47 @@ class login_screen:
                     signup_button.active = False
                     self.error_active = False
 
+            self.draw_screen(input_boxes,buttons,register_button,back_button,signup_button)
             
+
+    def draw_screen(self,input_boxes,buttons,register_button,back_button,signup_button):
+        self.WIN.blit(background_image,background_image.get_rect(topleft=(0,0)))
+        for box in input_boxes:  
+            box.update()
+            box.draw(self.WIN)
+        for button in buttons:
+            if(self.login):
+                button.draw_button(self.WIN)
             
-            #displays errors
-            if(self.error_active):
-                error_surface = Text()
-                error_surface = error_surface.createText(self.error_color,self.error_message,32)
-                self.WIN.blit(error_surface,(555,495))
-                
-            pygame.display.flip()
+        #controls screens
+        if(self.login):
+            #displays login title
+            self.WIN.blit(self.login_surface, (655, 275))
+            register_button.active = False
+            back_button.active = False
+        else:
+            #display register title and register/back buttons
+            self.WIN.blit(self.register_surface, (635, 275))
+            register_button.draw_button(self.WIN)
+            back_button.draw_button(self.WIN)
+
+        #screen switching buttons
+        if(signup_button.active == True):
+            self.login = False
+            self.error_active = False
+        
+        if(back_button.active == True):
+            self.login = True
+            signup_button.active = False
+            self.error_active = False
+        
+        #displays errors
+        if(self.error_active):
+            error_surface = Text()
+            error_surface = error_surface.createText(self.error_color,self.error_message,32)
+            self.WIN.blit(error_surface,(555,495))
+            
+        pygame.display.flip()
 
 
         

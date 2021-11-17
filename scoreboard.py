@@ -28,7 +28,8 @@ class Scoreboard:
         self.box_color = (117, 59, 0)
         self.text_color = (0,0,0)
         self.title = title
-        self.title_surface = FONT.render(self.title,True, self.text_color)
+        self.title_surface = Text()
+        self.title_surface = self.title_surface.createText(self.text_color,self.title, 28)
 
     def users_score(self):
         #display top 5

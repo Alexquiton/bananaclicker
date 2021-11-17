@@ -22,6 +22,7 @@ class Game_Screen:
         self.FPS = FPS
         background_image.convert(WIN)
         self.clock = pygame.time.Clock()
+        self.board = Scoreboard(1255,10,135,120, "Leader Board")
         
     def load_progress(self,bananas,username):
         self.bananas = bananas
@@ -57,15 +58,11 @@ class Game_Screen:
         data.writelines(list_of_lines) 
         data.close()
         data.close()
-        
-
-    def draw_screen(self):
+    
+    def runGame(self):
         game = Game(self.bananas)
         bananaBtn = BananaBtn()
         button_list = [bananaBtn]
-        board = Scoreboard(1255,10,135,120, "Leader Board")
-        #temp
-        counter_color = (0,0,0)
         while self.run:
             self.clock.tick(self.FPS)
             for event in pygame.event.get():
@@ -82,14 +79,17 @@ class Game_Screen:
                         self.bananas = game.bananas
                         button.active = False
             self.save_progress()
-            #self.WIN.fill(self.backgroundColor)
-            self.WIN.blit(background_image,background_image.get_rect(topleft=(0,0)))
-            
-            #anything draw to the screen
-            bananaBtn.draw_button(self.WIN)
-            counter_title = "Bananas: " + str(game.bananas)
-            counter_surface = self.FONT.render(counter_title, True, counter_color)
-            self.WIN.blit(counter_surface, (50,30))
-            board.draw(self.WIN)
+            self.draw_screen(bananaBtn,game)
 
-            pygame.display.flip()
+    def draw_screen(self,bananaBtn,game):
+        counter_color = (0,0,0)
+        #self.WIN.fill(self.backgroundColor)
+        self.WIN.blit(background_image,background_image.get_rect(topleft=(0,0)))
+        #anything draw to the screen
+        bananaBtn.draw_button(self.WIN)
+        counter_title = "Bananas: " + str(game.bananas)
+        counter_surface = self.FONT.render(counter_title, True, counter_color)
+        self.WIN.blit(counter_surface, (50,30))
+        self.board.draw(self.WIN)
+
+        pygame.display.flip()

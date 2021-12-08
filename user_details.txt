@@ -1,4 +1,2 @@
-{"username": "dev", "password": "dawg", "bananas": 20}
-{"username": "p2", "password": "pass2", "bananas": 10}
-{"username": "p3", "password": "pass3", "bananas": 10}
-{"username": "p4", "password": "pass4", "bananas": 30}
+{"username": "dev", "password": "dawg", "bananas": 6, "multiClicks": 4}
+{"username": "test_1", "password": "testpass", "bananas": 20, "multiClicks": 1}

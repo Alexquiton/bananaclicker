@@ -6,8 +6,8 @@ pygame.init()
 FONT = pygame.font.Font(None, 32)
 
 ############################################
-#Scoreboard class
-# @Alex Quiton
+# Scoreboard class
+#
 # Functions:
 # __init_ intializes the position of the scoreboard rect on the 
 # screen along with initializes the width and height of the rect

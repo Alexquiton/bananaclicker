@@ -48,6 +48,10 @@ class login_screen:
         self.clock = pygame.time.Clock()
         background_image.convert(self.WIN)
     
+    def __del__(self):
+        print("login screen deleted")
+        pass
+
     def runLogin(self):
         username_box = InputBox("Username",595,325,140,32)
         password_box = InputBox("Password",595,375,140,32)

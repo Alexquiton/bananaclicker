@@ -13,8 +13,7 @@ pygame.display.set_caption("Banana Clicker")
 
 #variables
 FPS = 25
-backgroundColor = (255,255,255)
-gameBGcolor = (255, 196, 0)
+
 
 #######################################
 # 
@@ -37,7 +36,7 @@ def main():
     if(gamerun):
         gamescreen = Game_Screen(WIN,FPS)
         #load game prgoress
-        gamescreen.load_progress(user_account["bananas"],user_account["username"])
+        gamescreen.load_progress(user_account["bananas"],user_account["username"],user_account["multiClicks"])
         gamescreen.runGame()
     pygame.quit()
 

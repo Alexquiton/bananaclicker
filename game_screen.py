@@ -3,8 +3,8 @@ import json
 from pygame.constants import BLEND_ALPHA_SDL2
 
 from pygame.time import Clock
-from banana_button import BananaBtn
 from game import Game
+from game_button import GameBtn
 from scoreboard import Scoreboard
 background_image = pygame.image.load("Assets/gameScreen_bg.png")
 background_image = pygame.transform.scale(background_image, (1400,800))
@@ -62,15 +62,18 @@ class Game_Screen:
         self.WIN = WIN
         self.run = True
         self.bananas = 0
+        self.multiClicks = 0
         self.username = ""
         self.FPS = FPS
         background_image.convert(WIN)
         self.clock = pygame.time.Clock()
         self.board = Scoreboard(1255,10,135,120, "Leader Board")
         
-    def load_progress(self,bananas,username):
+    def load_progress(self,bananas,username,multiClicks):
         self.bananas = bananas
         self.username = username
+        self.multiClicks = multiClicks
+
     
     def load_accounts(self):
         data = open("user_details.txt","r")
@@ -83,6 +86,7 @@ class Game_Screen:
         return account_list
 
     def save_progress(self):
+        #print(self.bananas)
         data = open("user_details.txt","r")
         account_list = self.load_accounts()
         list_of_lines = data.readlines()
@@ -92,6 +96,7 @@ class Game_Screen:
             if(account["username"] == self.username):
                 saved_account = account
                 account["bananas"] = self.bananas
+                account["multiClicks"] = self.multiClicks
                 break
             lineNum += 1
         if(lineNum == len(account_list)-1):
@@ -104,9 +109,10 @@ class Game_Screen:
         data.close()
     
     def runGame(self):
-        game = Game(self.bananas)
-        bananaBtn = BananaBtn()
-        button_list = [bananaBtn]
+        game = Game(self.bananas,self.multiClicks)
+        bananaBtn = GameBtn("banana_button",20,70,250,250,"Assets/banana_image.png","Assets/mouseBtn_down.mp3","Assets/mouseBtn_up.mp3")
+        multiclick = GameBtn("multiclick_button",500,250,25,25,"Assets/multiClick.png","Assets/mouseBtn_down.mp3","")
+        button_list = [bananaBtn,multiclick]
         while self.run:
             self.clock.tick(self.FPS)
             for event in pygame.event.get():
@@ -117,21 +123,36 @@ class Game_Screen:
                 for buttons in button_list:
                     buttons.on_click(event)
             for button in button_list:
-                if(button.button_name == "banana"):
+                if(button.button_name == "banana_button"):
                     if(button.active == True):
-                        game.addBanana(1)
+                        game.addBanana()
+                        self.bananas = game.bananas
+                        button.active = False
+                if(button.button_name == "multiclick_button"):
+                    if(button.active == True):
+                        game.multiClick()
+                        self.multiClicks = game.clickMultiplier
                         self.bananas = game.bananas
                         button.active = False
             self.save_progress()
-            self.draw_screen(bananaBtn,game)
+            self.draw_screen(button_list,game)
 
-    def draw_screen(self,bananaBtn,game):
-        counter_color = (0,0,0)
+
+    def draw_screen(self,button_list,game):
+        label_colors = (0,0,0)
         self.WIN.blit(background_image,background_image.get_rect(topleft=(0,0)))
         #anything draw to the screen
-        bananaBtn.draw_button(self.WIN)
+        for button in button_list:
+            button.draw_button(self.WIN)
         counter_title = "Bananas: " + str(game.bananas)
-        counter_surface = self.FONT.render(counter_title, True, counter_color)
+        counter_surface = self.FONT.render(counter_title, True, label_colors)
+        upgrade_title = "MultiClick: +" + str(game.clickMultiplier)
+        upgradeCost_title = "Cost: " + str(game.upgradeCost)
+        upgradeCost_surface = self.FONT.render(upgradeCost_title, True, label_colors)
+        
+        upgrade_surface = self.FONT.render(upgrade_title, True, label_colors)
+        self.WIN.blit(upgradeCost_surface, (530,250))
+        self.WIN.blit(upgrade_surface, (500, 220))
         self.WIN.blit(counter_surface, (50,30))
         self.board.draw(self.WIN)
         pygame.display.flip()

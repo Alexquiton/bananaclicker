@@ -150,7 +150,8 @@ class LoginScreenBtn:
             account = {
                 "username": username,
                 "password": password,
-                "bananas": 0
+                "bananas": 0,
+                "multiClicks": 0
             }
             data = open("user_details.txt","a")
             data.write("\n")

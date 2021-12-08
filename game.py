@@ -1,5 +1,5 @@
 import pygame
-import json
+
 
 #########################################
 # Game class
@@ -19,11 +19,22 @@ import json
 ##########################################
 
 class Game:
-    def __init__(self,bananas):
+    def __init__(self,bananas,multiClicks):
         self.bananas = bananas
-        
+        self.clickMultiplier = multiClicks
+        self.bananaPerClick = 1
+        self.upgradeCost = ((10 + self.clickMultiplier) * 10)
 
-    def addBanana(self,amount):
-        self.bananas += amount
+    def addBanana(self):
+        self.bananaPerClick = 1 + self.clickMultiplier
+        self.bananas += self.bananaPerClick
     
+    def multiClick(self):
+        if(self.bananas >= self.upgradeCost):
+            self.bananas -= self.upgradeCost
+            self.clickMultiplier += 1
+            self.upgradeCost += 10
+            
+        
+        
     

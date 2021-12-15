@@ -75,7 +75,7 @@ class Game_Screen:
         self.multiClicks = multiClicks
 
     
-    def load_accounts(self):
+    def load_accounts():
         data = open("user_details.txt","r")
         account_list = []
         for account in data:

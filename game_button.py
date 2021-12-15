@@ -1,6 +1,33 @@
 import pygame
 from pygame.constants import MOUSEBUTTONDOWN, MOUSEBUTTONUP
 import time
+#############################
+# GameBtn Class
+# Functions: 
+# __init__(buttonName,x,y,scaleX,scaleY,image,soundEffect1,soundEffect2):
+# @params: buttonName,x,y,scaleX,scaleY,image,soundEffect1,soundEffect2
+# buttonName is the name of the button in which function it would do
+# x and y are the positons of the button on the screen shown to the user
+# scaleX,scaleY refer to the amount to scale the image
+# image is the string path in which the image file is in
+# soundEffect1 and soundEffect2 are string paths in which the audio file is located
+# @brief: initalizes all of the self variables for the button
+# @return: none
+#
+# on_click(event):
+# @params: event
+# event refers to the user input (mouse button down, key down)
+# @breif: listens to when the mouse button is down and sets the button bool to true for active
+# and upon mouse release it set the button bool to false for not active along with plays the
+# sound effect for when the button mouse is down or up
+# @return: none
+#
+# draw_button(WIN):
+# @params: WIN
+# WIN refers to the screen in which the user is interacting with
+# @brief: draws the button onto the screen 
+# @return: none
+##############################
 
 class GameBtn:
     def __init__(self,buttonName,x,y,scaleX,scaleY,image,soundEffect1,soundEffect2):

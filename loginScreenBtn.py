@@ -86,7 +86,7 @@ class LoginScreenBtn:
         WIN.blit(self.placeholder_surface, (self.rect.x+5, self.rect.y+5))
         pygame.draw.rect(WIN,self.color, self.rect, 2)
     
-    def load(self):
+    def load():
         data = open("user_details.txt","r")
         account_list = []
         for account in data:

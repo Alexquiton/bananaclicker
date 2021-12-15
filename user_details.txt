@@ -1,3 +1,2 @@
 {"username": "dev", "password": "dawg", "bananas": 164, "multiClicks": 11}
 {"username": "test_1", "password": "testpass", "bananas": 20, "multiClicks": 1}
-{"username": "newAccount", "password": "newPass", "bananas": 0, "multiClicks": 0}
